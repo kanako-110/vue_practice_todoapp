@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue.js App</title>
+		<link rel="stylesheet" href="main.css" />
+	</head>
+	<body>
+		<div id="app">
+			<h1>チュートリアルToDoリスト</h1>
+			<label v-for="label in options">
+				<input type="radio" v-model="current" v-bind:value="label.value" />
+				{{label.label}}
+			</label>
+
+			{{ computedTodos.length }} 件を表示
+
+			<table>
+				<thead>
+					<tr v-for="item in computedTodos" v-bind:key="item.id">
+						<th class="id">{{item.id}}</th>
+						<td class="comment">{{item.comment}}</td>
+						<td class="state">
+							<button v-on:click="doChangeState(item)">
+								{{ labels[item.state]}}
+							</button>
+						</td>
+						<td class="buton">
+							<button v-on:click.ctrl="doRemove(item)">消去</button>
+						</td>
+					</tr>
+				</thead>
+			</table>
+			<p>※削除ボタンはコントロールキーを押しながらクリックして下さい</p>
+
+			<h2>新しい作業の追加</h2>
+			<form class="add-form" v-on:submit.prevent="doAdd">
+				<input type="text" ref="comment" />
+				<button type="submit">追加</button>
+			</form>
+			<!-- 絞り込みラジオボタン -->
+			<!-- ToDo テーブル -->
+			<!-- 新規登録フォーム -->
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+		<script src="main.js"></script>
+	</body>
+</html>
